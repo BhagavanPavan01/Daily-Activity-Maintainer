@@ -1,7 +1,42 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
 
 @layer base {
+  :root {
+    /* LIGHT MODE PALETTE (Overrides standard slate colors to light variants) */
+    --color-slate-900: #ffffff;
+    --color-slate-800: #f8fafc;
+    --color-slate-700: #e2e8f0;
+    --color-slate-600: #cbd5e1;
+    --color-slate-500: #94a3b8;
+    --color-slate-400: #64748b;
+    --color-slate-300: #475569;
+    --color-slate-200: #334155;
+    --color-slate-100: #1e293b;
+    --color-slate-50: #0f172a;
+    --color-white: #0f172a;
+    /* Extra fixes for visibility in light mode */
+    --color-blue-400: #3b82f6;
+    --color-purple-400: #8b5cf6;
+  }
+
+  /* DARK MODE PALETTE (Restores standard slate dark colors) */
+  .dark {
+    --color-slate-900: #0f172a;
+    --color-slate-800: #1e293b;
+    --color-slate-700: #334155;
+    --color-slate-600: #475569;
+    --color-slate-500: #64748b;
+    --color-slate-400: #94a3b8;
+    --color-slate-300: #cbd5e1;
+    --color-slate-200: #e2e8f0;
+    --color-slate-100: #f1f5f9;
+    --color-slate-50: #f8fafc;
+    --color-white: #ffffff;
+    --color-blue-400: #60a5fa;
+    --color-purple-400: #a78bfa;
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -10,9 +45,14 @@
 
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+    background-color: var(--color-slate-900);
     min-height: 100vh;
-    color: #f8fafc;
+    color: var(--color-white);
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  .dark body {
+    background: linear-gradient(135deg, var(--color-slate-900) 0%, #020617 100%);
   }
 
   #root {
@@ -28,16 +68,16 @@
   }
 
   .scrollbar-thin::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(100, 100, 100, 0.1);
     border-radius: 10px;
   }
 
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(100, 100, 100, 0.3);
     border-radius: 10px;
   }
 
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(100, 100, 100, 0.5);
   }
 }

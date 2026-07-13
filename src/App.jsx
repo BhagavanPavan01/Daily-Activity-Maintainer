@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { FaChartLine } from 'react-icons/fa';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ActivityInput from './components/ActivityInput';
 import ActivityList from './components/ActivityList';
 import Calendar from './components/Calendar';
 import RoutineTracker from './components/RoutineTracker';
+import AnalyticsView from './components/AnalyticsView';
+import UserProfile from './components/UserProfile';
 import useLocalStorage from './hooks/useLocalStorage';
 
 function App() {
@@ -13,6 +16,16 @@ function App() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [activeTab, setActiveTab] = useState('planner'); // 'planner' or 'routine'
+  const [currentView, setCurrentView] = useState('dashboard'); // 'dashboard', 'analytics', 'user'
+  const [theme, setTheme] = useLocalStorage('theme', 'dark');
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
 
   // Data migration for old array-based activities
   React.useEffect(() => {
@@ -140,70 +153,83 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col w-full">
-      <Header />
+      <Header currentView={currentView} setCurrentView={setCurrentView} theme={theme} setTheme={setTheme} />
       <main className="flex-1 p-4 md:p-8 w-full max-w-7xl mx-auto flex flex-col gap-8">
 
-        <div className="flex justify-center w-full">
-          <div className="bg-slate-800/40 border border-slate-700/50 p-1.5 rounded-2xl backdrop-blur-md inline-flex flex-wrap items-center gap-2 max-w-full justify-center shadow-2xl shadow-black/40 shadow-black/20">
-            <button
-              onClick={() => setActiveTab('planner')}
-              className={`px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 ${activeTab === 'planner'
-                ? 'bg-slate-800 text-blue-400 shadow-xl shadow-black/30 scale-100'
-                : 'text-white hover:bg-slate-800/40 border border-slate-700/50'
-                }`}
-            >
-              Day Planner
-            </button>
-            <button
-              onClick={() => setActiveTab('routine')}
-              className={`px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 ${activeTab === 'routine'
-                ? 'bg-slate-800 text-violet-400 shadow-xl shadow-black/30 scale-100'
-                : 'text-white hover:bg-slate-800/40 border border-slate-700/50'
-                }`}
-            >
-              Interview Prep Routine
-            </button>
-          </div>
-        </div>
+        {currentView === 'dashboard' && (
+          <>
+            <div className="flex justify-center w-full">
+              <div className="bg-slate-800/40 border border-slate-700/50 p-1.5 rounded-2xl backdrop-blur-md inline-flex flex-wrap items-center gap-2 max-w-full justify-center shadow-2xl shadow-black/20">
+                <button
+                  onClick={() => setActiveTab('planner')}
+                  className={`px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 ${activeTab === 'planner'
+                    ? 'bg-slate-800 text-blue-400 shadow-xl shadow-black/30 scale-100'
+                    : 'text-slate-300 hover:bg-slate-800/40 border border-slate-700/50'
+                    }`}
+                >
+                  Day Planner
+                </button>
+                <button
+                  onClick={() => setActiveTab('routine')}
+                  className={`px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 ${activeTab === 'routine'
+                    ? 'bg-slate-800 text-violet-400 shadow-xl shadow-black/30 scale-100'
+                    : 'text-slate-300 hover:bg-slate-800/40 border border-slate-700/50'
+                    }`}
+                >
+                  Interview Prep Routine
+                </button>
+                <button
+                  onClick={() => setCurrentView('analytics')}
+                  className={`px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 text-slate-300 hover:bg-slate-800/40 border border-slate-700/50`}
+                >
+                  <FaChartLine className="text-purple-400" /> Analytics
+                </button>
+              </div>
+            </div>
 
-        {activeTab === 'planner' ? (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 w-full">
-            <div className="flex flex-col gap-6 lg:col-span-3">
-              <ActivityInput onAddActivity={addActivity} selectedDate={selectedDate} />
-              <ActivityList
-                activities={activities[dateKey] || []}
-                onToggle={toggleActivity}
-                onDelete={deleteActivity}
-                onEdit={editActivity}
-                onClearCompleted={clearCompleted}
-              />
-            </div>
-            <div className="flex justify-center items-start overflow-x-auto pb-4 lg:col-span-1 w-full">
-              <Calendar
-                selectedDate={selectedDate}
-                onSelectDate={setSelectedDate}
-                currentMonth={currentMonth}
-                setCurrentMonth={setCurrentMonth}
-                getDateStatus={getDateStatus}
-              />
-            </div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 w-full">
-            <div className="lg:col-span-3">
-              <RoutineTracker selectedDate={selectedDate} routines={routines} setRoutines={setRoutines} />
-            </div>
-            <div className="flex justify-center items-start overflow-x-auto pb-4 lg:col-span-1 w-full">
-              <Calendar
-                selectedDate={selectedDate}
-                onSelectDate={setSelectedDate}
-                currentMonth={currentMonth}
-                setCurrentMonth={setCurrentMonth}
-                getDateStatus={getDateStatus}
-              />
-            </div>
-          </div>
+            {activeTab === 'planner' ? (
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 w-full">
+                <div className="flex flex-col gap-6 lg:col-span-3">
+                  <ActivityInput onAddActivity={addActivity} selectedDate={selectedDate} />
+                  <ActivityList
+                    activities={activities[dateKey] || []}
+                    onToggle={toggleActivity}
+                    onDelete={deleteActivity}
+                    onEdit={editActivity}
+                    onClearCompleted={clearCompleted}
+                  />
+                </div>
+                <div className="flex justify-center items-start overflow-x-auto pb-4 lg:col-span-1 w-full">
+                  <Calendar
+                    selectedDate={selectedDate}
+                    onSelectDate={setSelectedDate}
+                    currentMonth={currentMonth}
+                    setCurrentMonth={setCurrentMonth}
+                    getDateStatus={getDateStatus}
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 w-full">
+                <div className="lg:col-span-3">
+                  <RoutineTracker selectedDate={selectedDate} routines={routines} setRoutines={setRoutines} />
+                </div>
+                <div className="flex justify-center items-start overflow-x-auto pb-4 lg:col-span-1 w-full">
+                  <Calendar
+                    selectedDate={selectedDate}
+                    onSelectDate={setSelectedDate}
+                    currentMonth={currentMonth}
+                    setCurrentMonth={setCurrentMonth}
+                    getDateStatus={getDateStatus}
+                  />
+                </div>
+              </div>
+            )}
+          </>
         )}
+
+        {currentView === 'analytics' && <AnalyticsView activities={activities} />}
+        {currentView === 'user' && <UserProfile />}
       </main>
       <Footer />
     </div>
