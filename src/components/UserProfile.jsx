@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
-import useLocalStorage from '../hooks/useLocalStorage';
-import { FaUserCircle, FaSave, FaUserEdit } from 'react-icons/fa';
+import { FaUserCircle, FaSave, FaUserEdit, FaCamera } from 'react-icons/fa';
 
-function UserProfile() {
-    const [userData, setUserData] = useLocalStorage('user_profile_data', {
-        name: 'User',
-        email: '',
-        bio: '',
-        joinDate: new Date().toISOString()
-    });
-
+function UserProfile({ userData, setUserData }) {
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState(userData);
 
@@ -18,13 +10,38 @@ function UserProfile() {
         setIsEditing(false);
     };
 
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setFormData({ ...formData, photo: reader.result });
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const displayPhoto = isEditing ? formData.photo : userData.photo;
+
     return (
         <div className="flex flex-col items-center max-w-2xl mx-auto w-full gap-8 animate-fade-in mt-10">
             <div className="bg-slate-100/ dark:bg-slate-800/80 border border-slate-200/ dark:border-slate-700/50 w-full p-8 rounded-3xl shadow-2xl flex flex-col items-center gap-6 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-r from-blue-600/40 via-purple-600/40 to-indigo-600/40"></div>
 
-                <div className="w-32 h-32 rounded-full bg-white dark:bg-slate-900 border-4 border-slate-300 dark:border-slate-800 shadow-xl flex items-center justify-center relative z-10 overflow-hidden">
-                    <FaUserCircle className="text-8xl text-slate-400 dark:text-slate-500 dark:text-slate-400" />
+                <div className="w-32 h-32 rounded-full bg-white dark:bg-slate-900 border-4 border-slate-300 dark:border-slate-800 shadow-xl flex items-center justify-center relative z-10 overflow-hidden group">
+                    {displayPhoto ? (
+                        <img src={displayPhoto} alt="User Profile" className="w-full h-full object-cover" />
+                    ) : (
+                        <FaUserCircle className="text-8xl text-slate-400 dark:text-slate-500" />
+                    )}
+
+                    {isEditing && (
+                        <label className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">
+                            <FaCamera className="text-white text-2xl mb-1" />
+                            <span className="text-white text-xs font-semibold">Upload</span>
+                            <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+                        </label>
+                    )}
                 </div>
 
                 <div className="w-full relative z-10 flex flex-col gap-4">
@@ -75,7 +92,7 @@ function UserProfile() {
                                 Joined {new Date(userData.joinDate).toLocaleDateString()}
                             </p>
 
-                            <button onClick={() => setIsEditing(true)} className="mt-6 flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl font-semibold text-blue-400 border border-blue-500/30 hover:bg-blue-500/10 transition-all w-1/2">
+                            <button onClick={() => { setFormData(userData); setIsEditing(true); }} className="mt-6 flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl font-semibold text-blue-400 border border-blue-500/30 hover:bg-blue-500/10 transition-all w-1/2">
                                 <FaUserEdit /> Edit Profile
                             </button>
                         </div>

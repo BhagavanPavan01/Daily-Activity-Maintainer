@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaLayerGroup, FaUserCircle, FaBars, FaTimes, FaCalendarCheck, FaSun, FaMoon } from 'react-icons/fa';
 
-function Header({ currentView, setCurrentView, theme, setTheme }) {
+function Header({ currentView, setCurrentView, theme, setTheme, userData }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const handleNavClick = (view) => {
@@ -38,37 +38,40 @@ function Header({ currentView, setCurrentView, theme, setTheme }) {
                     </div>
                 </div>
 
-                {/* Desktop Navigation Section */}
-                <nav className="hidden md:flex items-center gap-2 bg-slate-800/60 p-1.5 rounded-full border border-slate-700/50 shadow-inner">
-                    <button
-                        onClick={() => handleNavClick('dashboard')}
-                        className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${currentView === 'dashboard' ? 'text-white bg-slate-700/80 shadow-sm' : 'text-slate-400 hover:text-white hover:bg-slate-700/50'}`}
-                    >
-                        <FaLayerGroup className={`${currentView === 'dashboard' ? 'text-blue-400' : 'text-slate-400'} transition-colors`} /> Dashboard
-                    </button>
-                    {/* Theme Toggle Button Inside Nav */}
-                    <button
-                        onClick={toggleTheme}
-                        className="flex items-center justify-center w-9 h-9 rounded-full text-slate-400 hover:text-white hover:bg-slate-700/50 transition-all duration-300"
-                        title="Toggle Theme"
-                    >
-                        {theme === 'dark' ? <FaSun className="text-amber-400 text-lg" /> : <FaMoon className="text-indigo-500 text-lg" />}
-                    </button>
-                </nav>
+                {/* Desktop Right Navigation / Profile */}
+                <div className="hidden md:flex items-center gap-6">
+                    <nav className="flex items-center gap-3">
+                        <button
+                            onClick={() => handleNavClick('dashboard')}
+                            className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${currentView === 'dashboard' ? 'text-white bg-gradient-to-r from-slate-700/80 to-slate-800 shadow-md border border-slate-600/50' : 'text-slate-400 hover:text-white hover:bg-slate-800/50 border border-transparent'}`}
+                        >
+                            <FaLayerGroup className={`${currentView === 'dashboard' ? 'text-blue-400' : 'text-slate-400'} transition-colors`} /> Dashboard
+                        </button>
+                        <button
+                            onClick={toggleTheme}
+                            className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-800/50 text-slate-400 hover:text-white hover:bg-slate-700/80 border border-slate-700/50 transition-all duration-300"
+                            title="Toggle Theme"
+                        >
+                            {theme === 'dark' ? <FaSun className="text-amber-400 text-lg" /> : <FaMoon className="text-indigo-500 text-lg" />}
+                        </button>
+                    </nav>
 
-                {/* Right Side / Profile */}
-                <div className="hidden md:flex items-center gap-4">
+                    {/* Profile Section */}
                     <div
-                        className="flex items-center gap-3 cursor-pointer group pl-2 border-l border-slate-700/50 transition-all hover:bg-slate-800/50 p-2 rounded-xl"
+                        className="flex items-center gap-3 cursor-pointer group pl-6 border-l border-slate-700/50 transition-all hover:bg-slate-800/20 py-1 rounded-l-full"
                         onClick={() => handleNavClick('user')}
                     >
                         <div className="flex flex-col items-end">
-                            <span className="text-sm font-semibold text-slate-200 group-hover:text-white transition-colors">User Profile</span>
-                            <span className="text-xs text-slate-500">Settings</span>
+                            <span className="text-sm font-bold text-slate-200 group-hover:text-white transition-colors">User Profile</span>
+                            <span className="text-xs text-slate-500 font-medium">Settings</span>
                         </div>
-                        <div className={`w-10 h-10 rounded-full bg-gradient-to-r p-[2px] ${currentView === 'user' ? 'from-green-400 to-blue-500 shadow-lg shadow-blue-500/30' : 'from-purple-500 to-blue-500'}`}>
+                        <div className={`w-11 h-11 rounded-full bg-gradient-to-r p-[2px] ${currentView === 'user' ? 'from-green-400 to-blue-500 shadow-lg shadow-blue-500/30' : 'from-purple-500 to-indigo-500'}`}>
                             <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center overflow-hidden relative">
-                                <FaUserCircle className={`text-3xl absolute scale-110 top-0.5 ${currentView === 'user' ? 'text-white' : 'text-slate-400'}`} />
+                                {userData?.photo ? (
+                                    <img src={userData.photo} alt="Profile" className="w-full h-full object-cover" />
+                                ) : (
+                                    <FaUserCircle className={`text-4xl absolute top-0.5 ${currentView === 'user' ? 'text-white' : 'text-slate-300 group-hover:text-white transition-colors duration-300'}`} />
+                                )}
                             </div>
                         </div>
                     </div>
@@ -110,7 +113,11 @@ function Header({ currentView, setCurrentView, theme, setTheme }) {
                         >
                             <div className={`w-12 h-12 rounded-full bg-gradient-to-r p-[2px] ${currentView === 'user' ? 'from-green-400 to-blue-500' : 'from-purple-500 to-blue-500'}`}>
                                 <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center overflow-hidden relative">
-                                    <FaUserCircle className="text-3xl text-slate-400 absolute scale-110 top-0.5" />
+                                    {userData?.photo ? (
+                                        <img src={userData.photo} alt="Profile" className="w-full h-full object-cover" />
+                                    ) : (
+                                        <FaUserCircle className="text-3xl text-slate-400 absolute scale-110 top-0.5" />
+                                    )}
                                 </div>
                             </div>
                             <div className="flex flex-col">

@@ -1,0 +1,17 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+# React Router / History API SPA Fallback
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# (Optional) Backend API Proxy for avoiding CORS issues in production:
+# Remove the comments and replace the URL if you have a Node.js backend.
+# [[redirects]]
+#   from = "/api/*"
+#   to = "https://your-backend-app.onrender.com/api/:splat"
+#   status = 200
+#   force = true

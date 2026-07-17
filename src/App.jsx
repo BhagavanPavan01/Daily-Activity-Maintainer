@@ -8,16 +8,41 @@ import Calendar from './components/Calendar';
 import RoutineTracker from './components/RoutineTracker';
 import AnalyticsView from './components/AnalyticsView';
 import UserProfile from './components/UserProfile';
+import GithubGraph from './components/GithubGraph';
 import useLocalStorage from './hooks/useLocalStorage';
 
 function App() {
   const [activities, setActivities] = useLocalStorage('activities', {});
   const [routines, setRoutines] = useLocalStorage('prep_routines_v2', {});
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const getInitialDate = () => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const dateParam = params.get('date');
+      if (dateParam) {
+        const parsed = new Date(dateParam);
+        // Correct for local timezone timezone offset if it was ISO string date only
+        if (!isNaN(parsed.getTime())) {
+          // we parse it as local time to avoid timezone shifts
+          return new Date(parsed.getTime() + parsed.getTimezoneOffset() * 60000);
+        }
+      }
+    }
+    return new Date();
+  };
+
+  const [selectedDate, setSelectedDate] = useState(getInitialDate());
+  const [currentMonth, setCurrentMonth] = useState(getInitialDate());
   const [activeTab, setActiveTab] = useState('planner'); // 'planner' or 'routine'
   const [currentView, setCurrentView] = useState('dashboard'); // 'dashboard', 'analytics', 'user'
   const [theme, setTheme] = useLocalStorage('theme', 'dark');
+
+  const [userData, setUserData] = useLocalStorage('user_profile_data', {
+    name: 'User',
+    email: '',
+    bio: '',
+    joinDate: new Date().toISOString(),
+    photo: null
+  });
 
   useEffect(() => {
     if (theme === 'dark') {
@@ -153,12 +178,12 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col w-full">
-      <Header currentView={currentView} setCurrentView={setCurrentView} theme={theme} setTheme={setTheme} />
+      <Header currentView={currentView} setCurrentView={setCurrentView} theme={theme} setTheme={setTheme} userData={userData} />
       <main className="flex-1 p-4 md:p-8 w-full max-w-7xl mx-auto flex flex-col gap-8">
 
         {currentView === 'dashboard' && (
           <>
-            <div className="flex justify-center w-full">
+            <div className="flex justify-center w-full mt-2">
               <div className="bg-slate-800/40 border border-slate-700/50 p-1.5 rounded-2xl backdrop-blur-md inline-flex flex-wrap items-center gap-2 max-w-full justify-center shadow-2xl shadow-black/20">
                 <button
                   onClick={() => setActiveTab('planner')}
@@ -225,11 +250,15 @@ function App() {
                 </div>
               </div>
             )}
+
+            <div className="w-full pt-4">
+              <GithubGraph activities={activities} routines={routines} selectedDate={selectedDate} onSelectDate={setSelectedDate} />
+            </div>
           </>
         )}
 
         {currentView === 'analytics' && <AnalyticsView activities={activities} />}
-        {currentView === 'user' && <UserProfile />}
+        {currentView === 'user' && <UserProfile userData={userData} setUserData={setUserData} />}
       </main>
       <Footer />
     </div>
