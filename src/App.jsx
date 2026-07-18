@@ -184,10 +184,10 @@ function App() {
         {currentView === 'dashboard' && (
           <>
             <div className="flex justify-center w-full mt-2">
-              <div className="bg-slate-800/40 border border-slate-700/50 p-1.5 rounded-2xl backdrop-blur-md inline-flex flex-wrap items-center gap-2 max-w-full justify-center shadow-2xl shadow-black/20">
+              <div className="bg-slate-800/40 border border-slate-700/50 p-2 sm:p-1.5 rounded-2xl backdrop-blur-md flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto max-w-full justify-center shadow-2xl shadow-black/20">
                 <button
                   onClick={() => setActiveTab('planner')}
-                  className={`px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 ${activeTab === 'planner'
+                  className={`w-full sm:w-auto px-4 sm:px-5 py-3 sm:py-2.5 rounded-xl font-semibold transition-all duration-300 flex justify-center items-center gap-2 ${activeTab === 'planner'
                     ? 'bg-slate-800 text-blue-400 shadow-xl shadow-black/30 scale-100'
                     : 'text-slate-300 hover:bg-slate-800/40 border border-slate-700/50'
                     }`}
@@ -196,7 +196,7 @@ function App() {
                 </button>
                 <button
                   onClick={() => setActiveTab('routine')}
-                  className={`px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 ${activeTab === 'routine'
+                  className={`w-full sm:w-auto px-4 sm:px-5 py-3 sm:py-2.5 rounded-xl font-semibold transition-all duration-300 flex justify-center items-center gap-2 ${activeTab === 'routine'
                     ? 'bg-slate-800 text-violet-400 shadow-xl shadow-black/30 scale-100'
                     : 'text-slate-300 hover:bg-slate-800/40 border border-slate-700/50'
                     }`}
@@ -205,7 +205,7 @@ function App() {
                 </button>
                 <button
                   onClick={() => setCurrentView('analytics')}
-                  className={`px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 text-slate-300 hover:bg-slate-800/40 border border-slate-700/50`}
+                  className={`w-full sm:w-auto px-4 sm:px-5 py-3 sm:py-2.5 rounded-xl font-semibold transition-all duration-300 flex justify-center items-center gap-2 text-slate-300 hover:bg-slate-800/40 border border-slate-700/50`}
                 >
                   <FaChartLine className="text-purple-400" /> Analytics
                 </button>
@@ -224,7 +224,7 @@ function App() {
                     onClearCompleted={clearCompleted}
                   />
                 </div>
-                <div className="flex justify-center items-start overflow-x-auto pb-4 lg:col-span-1 w-full">
+                <div className="flex justify-center overflow-x-auto pb-4 lg:col-span-1 w-full h-full">
                   <Calendar
                     selectedDate={selectedDate}
                     onSelectDate={setSelectedDate}
@@ -239,7 +239,7 @@ function App() {
                 <div className="lg:col-span-3">
                   <RoutineTracker selectedDate={selectedDate} routines={routines} setRoutines={setRoutines} />
                 </div>
-                <div className="flex justify-center items-start overflow-x-auto pb-4 lg:col-span-1 w-full">
+                <div className="flex justify-center overflow-x-auto pb-4 lg:col-span-1 w-full h-full">
                   <Calendar
                     selectedDate={selectedDate}
                     onSelectDate={setSelectedDate}

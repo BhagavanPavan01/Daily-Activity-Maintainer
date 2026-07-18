@@ -25,7 +25,7 @@ function UserProfile({ userData, setUserData }) {
 
     return (
         <div className="flex flex-col items-center max-w-2xl mx-auto w-full gap-8 animate-fade-in mt-10">
-            <div className="bg-slate-100/ dark:bg-slate-800/80 border border-slate-200/ dark:border-slate-700/50 w-full p-8 rounded-3xl shadow-2xl flex flex-col items-center gap-6 relative overflow-hidden">
+            <div className="bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/50 w-full p-6 sm:p-8 rounded-3xl shadow-2xl flex flex-col items-center gap-6 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-r from-blue-600/40 via-purple-600/40 to-indigo-600/40"></div>
 
                 <div className="w-32 h-32 rounded-full bg-white dark:bg-slate-900 border-4 border-slate-300 dark:border-slate-800 shadow-xl flex items-center justify-center relative z-10 overflow-hidden group">
@@ -53,7 +53,7 @@ function UserProfile({ userData, setUserData }) {
                                     type="text"
                                     value={formData.name}
                                     onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                    className="w-full bg-white/ dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all font-semibold"
+                                    className="w-full bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all font-semibold"
                                 />
                             </div>
                             <div>
@@ -62,7 +62,7 @@ function UserProfile({ userData, setUserData }) {
                                     type="email"
                                     value={formData.email}
                                     onChange={e => setFormData({ ...formData, email: e.target.value })}
-                                    className="w-full bg-white/ dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                                    className="w-full bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
                                 />
                             </div>
                             <div>
@@ -70,7 +70,7 @@ function UserProfile({ userData, setUserData }) {
                                 <textarea
                                     value={formData.bio}
                                     onChange={e => setFormData({ ...formData, bio: e.target.value })}
-                                    className="w-full bg-white/ dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all min-h-[100px]"
+                                    className="w-full bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all min-h-[100px]"
                                 ></textarea>
                             </div>
                             <div className="flex justify-end gap-3 mt-4">
@@ -92,7 +92,7 @@ function UserProfile({ userData, setUserData }) {
                                 Joined {new Date(userData.joinDate).toLocaleDateString()}
                             </p>
 
-                            <button onClick={() => { setFormData(userData); setIsEditing(true); }} className="mt-6 flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl font-semibold text-blue-400 border border-blue-500/30 hover:bg-blue-500/10 transition-all w-1/2">
+                            <button onClick={() => { setFormData(userData); setIsEditing(true); }} className="mt-6 flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl font-semibold text-blue-400 border border-blue-500/30 hover:bg-blue-500/10 transition-all w-full sm:w-1/2">
                                 <FaUserEdit /> Edit Profile
                             </button>
                         </div>

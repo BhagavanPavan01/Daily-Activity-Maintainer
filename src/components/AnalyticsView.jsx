@@ -121,28 +121,28 @@ function AnalyticsView({ activities }) {
 
             {/* General Overview Stats */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="bg-slate-100/ dark:bg-slate-800/60 border border-slate-200/ dark:border-slate-700/50 p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 relative overflow-hidden group">
+                <div className="bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50 p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 relative overflow-hidden group">
                     <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <FaListUl className="text-4xl text-blue-400 mb-2 transform group-hover:scale-110 transition-transform" />
                     <span className="text-4xl font-extrabold text-slate-900 dark:text-white">{stats.totalTasks}</span>
                     <span className="text-slate-400 dark:text-slate-500 dark:text-slate-400 font-medium">Total Tasks Created</span>
                 </div>
 
-                <div className="bg-slate-100/ dark:bg-slate-800/60 border border-slate-200/ dark:border-slate-700/50 p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 relative overflow-hidden group">
+                <div className="bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50 p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 relative overflow-hidden group">
                     <div className="absolute inset-0 bg-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <FaCheckCircle className="text-4xl text-green-400 mb-2 transform group-hover:scale-110 transition-transform" />
                     <span className="text-4xl font-extrabold text-slate-900 dark:text-white">{stats.completedTasks}</span>
                     <span className="text-slate-400 dark:text-slate-500 dark:text-slate-400 font-medium">Completed Tasks</span>
                 </div>
 
-                <div className="bg-slate-100/ dark:bg-slate-800/60 border border-slate-200/ dark:border-slate-700/50 p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 relative overflow-hidden group">
+                <div className="bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50 p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 relative overflow-hidden group">
                     <div className="absolute inset-0 bg-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <FaChartBar className="text-4xl text-purple-400 mb-2 transform group-hover:scale-110 transition-transform" />
                     <span className="text-4xl font-extrabold text-slate-900 dark:text-white">{stats.completionRate}%</span>
                     <span className="text-slate-400 dark:text-slate-500 dark:text-slate-400 font-medium">Global Completion Rate</span>
                 </div>
 
-                <div className="bg-slate-100/ dark:bg-slate-800/60 border border-slate-200/ dark:border-slate-700/50 p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 relative overflow-hidden group">
+                <div className="bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50 p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 relative overflow-hidden group">
                     <div className="absolute inset-0 bg-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <FaCalendarDay className="text-4xl text-orange-400 mb-2 transform group-hover:scale-110 transition-transform" />
                     <span className="text-4xl font-extrabold text-slate-900 dark:text-white">{stats.totalDays}</span>
@@ -153,7 +153,7 @@ function AnalyticsView({ activities }) {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Advanced Algorithm: Streaks and Productivity */}
                 <div className="lg:col-span-1 flex flex-col gap-6">
-                    <div className="bg-slate-100/ dark:bg-slate-800/60 border border-slate-200/ dark:border-slate-700/50 p-6 rounded-2xl shadow-xl flex flex-col relative overflow-hidden group">
+                    <div className="bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50 p-6 rounded-2xl shadow-xl flex flex-col relative overflow-hidden group">
                         <div className="flex items-center gap-4 mb-4">
                             <div className="p-3 bg-orange-500/20 rounded-xl">
                                 <FaFire className="text-2xl text-orange-400 animate-pulse" />
@@ -173,7 +173,7 @@ function AnalyticsView({ activities }) {
                         </div>
                     </div>
 
-                    <div className="bg-slate-100/ dark:bg-slate-800/60 border border-slate-200/ dark:border-slate-700/50 p-6 rounded-2xl shadow-xl flex flex-col relative overflow-hidden group">
+                    <div className="bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50 p-6 rounded-2xl shadow-xl flex flex-col relative overflow-hidden group">
                         <div className="flex items-center gap-4 mb-4">
                             <div className="p-3 bg-indigo-500/20 rounded-xl">
                                 <FaTrophy className="text-2xl text-indigo-400 transform group-hover:-rotate-12 transition-transform" />
@@ -213,10 +213,10 @@ function AnalyticsView({ activities }) {
                                     </div>
 
                                     {/* Bar Graphic */}
-                                    <div className="w-full max-w-[48px] relative flex flex-col justify-end bg-slate-100/ dark:bg-slate-800/50 rounded-xl transition-all duration-500 overflow-hidden" style={{ height: '100%', minHeight: '10px' }}>
+                                    <div className="w-full max-w-[48px] relative flex flex-col justify-end bg-slate-100 dark:bg-slate-800/50 rounded-xl transition-all duration-500 overflow-hidden" style={{ height: '100%', minHeight: '10px' }}>
                                         {/* Background Track (Total Tasks) */}
                                         <div
-                                            className="absolute bottom-0 w-full bg-slate-200/ dark:bg-slate-700/60 rounded-xl transition-all duration-700 group-hover:bg-slate-600/60"
+                                            className="absolute bottom-0 w-full bg-slate-200 dark:bg-slate-700/60 rounded-xl transition-all duration-700 group-hover:bg-slate-600/60"
                                             style={{ height: day.total > 0 ? totalHeightStr : '4px' }}
                                         ></div>
                                         {/* Highlight Track (Completed Tasks) */}

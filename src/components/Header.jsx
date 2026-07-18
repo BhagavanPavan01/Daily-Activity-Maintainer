@@ -16,30 +16,28 @@ function Header({ currentView, setCurrentView, theme, setTheme, userData }) {
     return (
         <header className="bg-slate-900/90 backdrop-blur-2xl border-b border-slate-700/50 shadow-[0_4px_30px_rgba(0,0,0,0.5)] sticky top-0 z-50 w-full transition-all duration-300">
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute -top-10 -left-10 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
-                <div className="absolute top-0 right-1/4 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
+                {/* Background removed as requested */}
             </div>
 
             <div className="relative z-10 px-4 md:px-8 max-w-7xl mx-auto flex items-center justify-between h-20">
-                {/* Logo Section */}
+                {/* Logo Section - Left Aligned */}
                 <div
-                    className="flex items-center gap-4 cursor-pointer group"
+                    className="flex items-center gap-3 md:gap-4 cursor-pointer whitespace-nowrap"
                     onClick={() => setCurrentView('dashboard')}
                 >
-                    <div className="relative flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg shadow-blue-500/30 overflow-hidden transform transition-transform group-hover:scale-105 group-hover:rotate-3">
-                        <div className="absolute inset-0 bg-white/20 transform -skew-x-12 translate-x-full group-hover:-translate-x-full transition-transform duration-700 ease-in-out"></div>
-                        <FaCalendarCheck className="text-2xl text-white drop-shadow-md z-10" />
+                    <div className="relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg shadow-blue-500/30 overflow-hidden">
+                        <FaCalendarCheck className="text-xl md:text-2xl text-white drop-shadow-md z-10" />
                     </div>
                     <div className="flex flex-col">
-                        <h1 className="text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-slate-300 tracking-tight leading-none group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300">
+                        <h1 className="text-xl sm:text-2xl md:text-3xl font-serif font-bold text-slate-800 dark:text-white tracking-wide">
                             Daily Activity
                         </h1>
-                        <span className="text-xs md:text-sm text-blue-400 font-medium tracking-widest uppercase mt-0.5">Maintainer</span>
+                        <span className="text-[10px] md:text-xs text-blue-500 dark:text-blue-400 font-semibold tracking-widest uppercase mt-[1px]">Maintainer</span>
                     </div>
                 </div>
 
                 {/* Desktop Right Navigation / Profile */}
-                <div className="hidden md:flex items-center gap-6">
+                <div className="hidden md:flex justify-end items-center gap-6">
                     <nav className="flex items-center gap-3">
                         <button
                             onClick={() => handleNavClick('dashboard')}
@@ -96,7 +94,7 @@ function Header({ currentView, setCurrentView, theme, setTheme, userData }) {
 
             {/* Mobile Navigation Menu */}
             {isMenuOpen && (
-                <div className="md:hidden border-t border-slate-700/50 bg-slate-900/95 backdrop-blur-xl">
+                <div className="md:hidden absolute top-auto left-0 w-full border-t border-slate-700/50 bg-slate-900/95 backdrop-blur-xl shadow-2xl shadow-black/50 z-50">
                     <nav className="flex flex-col px-4 py-6 gap-4">
                         <button
                             onClick={() => handleNavClick('dashboard')}

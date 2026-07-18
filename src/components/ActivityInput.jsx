@@ -20,7 +20,7 @@ function ActivityInput({ onAddActivity, selectedDate }) {
             <h2 className="text-xl font-semibold text-slate-100 mb-4 flex items-center gap-2">
                 {titleText}
             </h2>
-            <form onSubmit={handleSubmit} className="flex gap-3">
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
                 <input
                     type="text"
                     placeholder="Enter a new activity..."

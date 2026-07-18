@@ -41,7 +41,7 @@ function RoutineTracker({ selectedDate, routines, setRoutines }) {
 
     return (
         <div className="flex flex-col gap-8 max-w-6xl mx-auto w-full animate-fade-in">
-            <div className="bg-slate-800/90 border border-slate-700/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-2xl shadow-black/40">
+            <div className="bg-slate-800/90 border border-slate-700/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl shadow-black/40">
                 <h2 className="text-2xl font-bold text-slate-100 mb-6 flex items-center gap-3">
                     <FaCheckCircle className="text-blue-400" /> Log Work for {selectedDate.toLocaleDateString()}
                 </h2>
@@ -88,7 +88,7 @@ function RoutineTracker({ selectedDate, routines, setRoutines }) {
                 </form>
             </div>
 
-            <div className="bg-slate-800/90 border border-slate-700/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-2xl shadow-black/40">
+            <div className="bg-slate-800/90 border border-slate-700/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl shadow-black/40">
                 <h3 className="text-xl font-bold text-slate-100 mb-6 font-medium">Recent Activity Log</h3>
                 {currentDateRoutines.length === 0 ? (
                     <div className="text-center py-10">
