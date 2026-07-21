@@ -201,7 +201,7 @@ function App() {
                     : 'text-slate-300 hover:bg-slate-800/40 border border-slate-700/50'
                     }`}
                 >
-                  Interview Prep Routine
+                  Daily Routine
                 </button>
                 <button
                   onClick={() => setCurrentView('analytics')}
@@ -224,7 +224,7 @@ function App() {
                     onClearCompleted={clearCompleted}
                   />
                 </div>
-                <div className="flex justify-center overflow-x-auto pb-4 lg:col-span-1 w-full h-full">
+                <div className="flex justify-center overflow-x-auto pb-4 lg:col-span-1 w-full h-fit lg:sticky lg:top-24">
                   <Calendar
                     selectedDate={selectedDate}
                     onSelectDate={setSelectedDate}
@@ -239,7 +239,7 @@ function App() {
                 <div className="lg:col-span-3">
                   <RoutineTracker selectedDate={selectedDate} routines={routines} setRoutines={setRoutines} />
                 </div>
-                <div className="flex justify-center overflow-x-auto pb-4 lg:col-span-1 w-full h-full">
+                <div className="flex justify-center overflow-x-auto pb-4 lg:col-span-1 w-full h-fit lg:sticky lg:top-24">
                   <Calendar
                     selectedDate={selectedDate}
                     onSelectDate={setSelectedDate}

@@ -64,7 +64,7 @@ function Calendar({ selectedDate, onSelectDate, currentMonth, setCurrentMonth, g
     ];
 
     return (
-        <div className="bg-slate-800/90 border border-slate-700/50 backdrop-blur-sm rounded-2xl p-6 shadow-2xl shadow-black/40 w-full animate-fade-in h-full flex flex-col">
+        <div className="bg-slate-800/90 border border-slate-700/50 backdrop-blur-sm rounded-2xl p-6 shadow-2xl shadow-black/40 w-full animate-fade-in flex flex-col h-fit">
             <div className="flex justify-between items-center mb-5">
                 <button
                     onClick={() => changeMonth(-1)}
@@ -82,7 +82,7 @@ function Calendar({ selectedDate, onSelectDate, currentMonth, setCurrentMonth, g
                     <FaChevronRight />
                 </button>
             </div>
-            <div className="flex-1 flex flex-col justify-center">
+            <div className="flex flex-col justify-center">
                 <div className="grid grid-cols-7 gap-x-1 gap-y-2">
                     {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
                         <div key={day} className="text-center text-xs font-semibold text-slate-400 py-2">
