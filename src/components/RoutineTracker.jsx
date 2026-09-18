@@ -78,26 +78,33 @@ function RoutineTracker({ selectedDate, routines, setRoutines }) {
         setNotes('');
     };
 
+    const handleDeleteRoutine = (idToRemove) => {
+        setRoutines(prev => ({
+            ...prev,
+            [dateKey]: (prev[dateKey] || []).filter(r => r.id !== idToRemove)
+        }));
+    };
+
     const getIcon = (iconName) => {
         return iconMap[iconName] || <FaListUl />;
     };
 
     return (
-        <div className="flex flex-col gap-8 max-w-6xl mx-auto w-full animate-fade-in">
+        <div className="flex flex-col gap-4 sm:gap-6 max-w-6xl mx-auto w-full animate-fade-in">
             <div className="bg-slate-800/90 border border-slate-700/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl shadow-black/40">
-                <h2 className="text-2xl font-bold text-slate-100 mb-6 flex items-center gap-3">
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-100 mb-6 flex items-center gap-3">
                     <FaCheckCircle className="text-blue-400" /> Log Work for {selectedDate.toLocaleDateString()}
                 </h2>
 
                 <form onSubmit={handleAddCategory} className="mb-8 p-4 bg-slate-900/50 border border-slate-700 rounded-xl flex flex-col sm:flex-row gap-4 items-end">
                     <div className="flex-1 w-full">
-                        <label className="block text-sm font-medium text-slate-300 mb-2">Add New Routine Category</label>
+                        <label className="block text-xs sm:text-sm font-medium text-slate-300 mb-2">Add New Routine Category</label>
                         <input
                             type="text"
                             value={newCategoryName}
                             onChange={(e) => setNewCategoryName(e.target.value)}
                             placeholder="E.g., Read 10 Pages, Workout..."
-                            className="w-full px-4 py-3 bg-slate-800 border-2 border-slate-700 rounded-xl focus:border-blue-500 focus:outline-none text-slate-100"
+                            className="w-full px-4 py-3 bg-slate-800 border-2 border-slate-700 rounded-xl focus:border-blue-500 focus:outline-none text-slate-100 text-sm sm:text-base"
                         />
                     </div>
                     <button type="submit" className="w-full sm:w-auto px-6 py-3 bg-slate-700 hover:bg-blue-600 text-white rounded-xl font-bold transition-all text-sm flex justify-center items-center gap-2">
@@ -128,7 +135,7 @@ function RoutineTracker({ selectedDate, routines, setRoutines }) {
                                         <span className="font-medium text-slate-100 flex-1">{category.label}</span>
                                         <div
                                             onClick={(e) => handleDeleteCategory(e, category.id)}
-                                            className="opacity-0 group-hover:opacity-100 p-2 text-slate-400 hover:text-red-500 transition-opacity bg-slate-800 rounded-full hover:bg-slate-700"
+                                            className="opacity-100 md:opacity-0 md:group-hover:opacity-100 p-2 text-slate-400 hover:text-red-500 transition-opacity bg-slate-800 rounded-full hover:bg-slate-700"
                                             title="Remove Routine Category"
                                         >
                                             <FaTrash size={12} />
@@ -140,12 +147,12 @@ function RoutineTracker({ selectedDate, routines, setRoutines }) {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-slate-100 mb-2">Details / Notes (Optional)</label>
+                        <label className="block text-xs sm:text-sm font-medium text-slate-100 mb-2">Details / Notes (Optional)</label>
                         <textarea
                             value={notes}
                             onChange={(e) => setNotes(e.target.value)}
                             placeholder="Add your notes here..."
-                            className="w-full px-4 py-3 border-2 border-slate-700 rounded-xl transition-all outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 bg-slate-900/50 focus:bg-slate-800 resize-none"
+                            className="w-full px-4 py-3 border-2 border-slate-700 rounded-xl transition-all outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 bg-slate-900/50 focus:bg-slate-800 resize-none text-sm sm:text-base"
                             rows="3"
                         ></textarea>
                     </div>
@@ -153,7 +160,7 @@ function RoutineTracker({ selectedDate, routines, setRoutines }) {
                     <button
                         type="submit"
                         disabled={!selectedCategory}
-                        className="px-8 py-4 bg-gradient-to-r from-blue-600 to-violet-600 text-white rounded-xl font-bold text-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-blue-900/40 flex items-center justify-center gap-2 disabled:opacity-50 disabled:hover:scale-100"
+                        className="px-8 py-4 bg-gradient-to-r from-blue-600 to-violet-600 text-white rounded-xl font-bold text-base sm:text-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-blue-900/40 flex items-center justify-center gap-2 disabled:opacity-50 disabled:hover:scale-100"
                     >
                         <FaPlus /> Save Record
                     </button>
@@ -161,11 +168,11 @@ function RoutineTracker({ selectedDate, routines, setRoutines }) {
             </div>
 
             <div className="bg-slate-800/90 border border-slate-700/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl shadow-black/40">
-                <h3 className="text-xl font-bold text-slate-100 mb-6 font-medium">Recent Activity Log</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-slate-100 mb-6 font-medium">Recent Activity Log</h3>
                 {currentDateRoutines.length === 0 ? (
                     <div className="text-center py-10">
-                        <p className="text-slate-400 text-lg">No records yet.</p>
-                        <p className="text-slate-500 text-sm mt-1">Consistency is key!</p>
+                        <p className="text-slate-400 text-base sm:text-lg">No records yet.</p>
+                        <p className="text-slate-500 text-xs sm:text-sm mt-1">Consistency is key!</p>
                     </div>
                 ) : (
                     <div className="flex flex-col gap-4 max-h-[600px] overflow-y-auto scrollbar-thin pr-2">
@@ -179,7 +186,7 @@ function RoutineTracker({ selectedDate, routines, setRoutines }) {
                             };
                             const dateObj = new Date(routine.timestamp);
                             return (
-                                <div key={routine.id} className="bg-slate-900/50 border border-slate-700 rounded-xl p-5 hover:shadow-xl shadow-black/30 transition-shadow duration-300 animate-slide-in-left">
+                                <div key={routine.id} className="bg-slate-900/50 border border-slate-700 rounded-xl p-4 sm:p-5 hover:shadow-xl shadow-black/30 transition-shadow duration-300 animate-slide-in-left">
                                     <div className="flex flex-col md:flex-row md:items-center justify-between mb-3 gap-2">
                                         <div className="flex items-center gap-3">
                                             <div className={`p-3 rounded-lg text-white ${category.bg} shadow-lg shadow-black/20`}>
@@ -187,14 +194,21 @@ function RoutineTracker({ selectedDate, routines, setRoutines }) {
                                             </div>
                                             <span className="font-bold text-slate-100 text-lg">{category.label}</span>
                                         </div>
-                                        <div className="flex items-center gap-4 text-sm text-slate-400 font-medium">
+                                        <div className="flex items-center gap-3 text-sm text-slate-400 font-medium">
                                             <span className="flex items-center gap-1"><FaCalendarAlt /> {dateObj.toLocaleDateString()}</span>
                                             <span className="flex items-center gap-1"><FaClock /> {dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                            <button
+                                                onClick={() => handleDeleteRoutine(routine.id)}
+                                                className="flex items-center justify-center p-2 text-red-400/70 hover:text-white bg-slate-800 hover:bg-red-500 rounded-full transition-all duration-300"
+                                                title="Delete Log"
+                                            >
+                                                <FaTrash size={12} />
+                                            </button>
                                         </div>
                                     </div>
                                     {routine.notes && (
-                                        <div className="pl-14">
-                                            <p className="text-slate-300 bg-slate-800 p-3 rounded-lg border border-slate-700 whitespace-pre-wrap">{routine.notes}</p>
+                                        <div className="pl-0 sm:pl-14">
+                                            <p className="text-slate-300 bg-slate-800 p-3 rounded-lg border border-slate-700 whitespace-pre-wrap text-sm sm:text-base">{routine.notes}</p>
                                         </div>
                                     )}
                                 </div>

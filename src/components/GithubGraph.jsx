@@ -91,7 +91,7 @@ function GithubGraph({ activities, routines, selectedDate, onSelectDate }) {
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
     return (
-        <div className="w-full bg-white dark:bg-slate-900/50 backdrop-blur-md rounded-3xl border border-slate-200 dark:border-slate-800/60 p-5 md:p-8 shadow-xl shadow-slate-200/50 dark:shadow-none mb-2 hover:shadow-2xl transition-shadow duration-500">
+        <div className="w-full bg-white dark:bg-slate-900/50 backdrop-blur-md rounded-3xl border border-slate-200 dark:border-slate-800/60 p-4 md:p-8 shadow-xl shadow-slate-200/50 dark:shadow-none mb-2 hover:shadow-2xl transition-shadow duration-500">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 sm:mb-8">
                 <h2 className="text-xl font-bold text-slate-800 dark:text-white flex items-center gap-3">
                     <span className="relative flex h-4 w-4">

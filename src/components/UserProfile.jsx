@@ -53,7 +53,7 @@ function UserProfile({ userData, setUserData }) {
                                     type="text"
                                     value={formData.name}
                                     onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                    className="w-full bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all font-semibold"
+                                    className="w-full bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all font-semibold text-sm sm:text-base"
                                 />
                             </div>
                             <div>
@@ -62,7 +62,7 @@ function UserProfile({ userData, setUserData }) {
                                     type="email"
                                     value={formData.email}
                                     onChange={e => setFormData({ ...formData, email: e.target.value })}
-                                    className="w-full bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                                    className="w-full bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-sm sm:text-base"
                                 />
                             </div>
                             <div>
@@ -70,29 +70,29 @@ function UserProfile({ userData, setUserData }) {
                                 <textarea
                                     value={formData.bio}
                                     onChange={e => setFormData({ ...formData, bio: e.target.value })}
-                                    className="w-full bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all min-h-[100px]"
+                                    className="w-full bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all min-h-[100px] text-sm sm:text-base"
                                 ></textarea>
                             </div>
                             <div className="flex justify-end gap-3 mt-4">
-                                <button onClick={() => setIsEditing(false)} className="px-6 py-2.5 rounded-xl font-semibold text-slate-300 dark:text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:text-white hover:bg-slate-200 dark:bg-slate-700 transition-all">Cancel</button>
-                                <button onClick={handleSave} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-slate-900 dark:text-white px-6 py-2.5 rounded-xl font-semibold shadow-lg shadow-blue-600/30 transition-all">
+                                <button onClick={() => setIsEditing(false)} className="px-6 py-2.5 rounded-xl font-semibold text-sm sm:text-base text-slate-300 dark:text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:text-white hover:bg-slate-200 dark:bg-slate-700 transition-all">Cancel</button>
+                                <button onClick={handleSave} className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-slate-900 dark:text-white px-6 py-2.5 rounded-xl font-semibold text-sm sm:text-base shadow-lg shadow-blue-600/30 transition-all">
                                     <FaSave /> Save Changes
                                 </button>
                             </div>
                         </div>
                     ) : (
                         <div className="flex flex-col items-center gap-2 w-full">
-                            <h2 className="text-3xl font-bold text-slate-900 dark:text-white text-center pb-2">
+                            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white text-center pb-2">
                                 {userData.name || 'User'}
                             </h2>
-                            {userData.email && <p className="text-slate-400 dark:text-slate-500 dark:text-slate-400">{userData.email}</p>}
-                            {userData.bio && <p className="text-slate-300 dark:text-slate-600 dark:text-slate-300 mt-2 text-center max-w-md">{userData.bio}</p>}
+                            {userData.email && <p className="text-sm sm:text-base text-slate-400 dark:text-slate-500 dark:text-slate-400">{userData.email}</p>}
+                            {userData.bio && <p className="text-sm sm:text-base text-slate-300 dark:text-slate-600 dark:text-slate-300 mt-2 text-center max-w-md">{userData.bio}</p>}
 
                             <p className="text-xs text-slate-400 dark:text-slate-500 mt-4">
                                 Joined {new Date(userData.joinDate).toLocaleDateString()}
                             </p>
 
-                            <button onClick={() => { setFormData(userData); setIsEditing(true); }} className="mt-6 flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl font-semibold text-blue-400 border border-blue-500/30 hover:bg-blue-500/10 transition-all w-full sm:w-1/2">
+                            <button onClick={() => { setFormData(userData); setIsEditing(true); }} className="mt-6 flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl font-semibold text-sm sm:text-base text-blue-400 border border-blue-500/30 hover:bg-blue-500/10 transition-all w-full sm:w-1/2">
                                 <FaUserEdit /> Edit Profile
                             </button>
                         </div>

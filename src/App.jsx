@@ -209,42 +209,48 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col w-full">
       <Header currentView={currentView} setCurrentView={setCurrentView} theme={theme} setTheme={setTheme} userData={userData} />
-      <main className="flex-1 p-4 md:p-8 w-full max-w-7xl mx-auto flex flex-col gap-8">
+      <main className="flex-1 p-2 sm:p-4 md:p-8 w-full max-w-7xl mx-auto flex flex-col gap-4 md:gap-8">
 
         {currentView === 'dashboard' && (
           <>
-            <div className="flex justify-center w-full mt-2">
-              <div className="bg-slate-800/40 border border-slate-700/50 p-2 sm:p-1.5 rounded-2xl backdrop-blur-md flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto max-w-full justify-center shadow-2xl shadow-black/20">
+            <div className="flex justify-center w-full mt-1 sm:mt-2 px-1">
+              <div className="bg-slate-800/60 border border-slate-700/50 p-1 sm:p-1.5 rounded-2xl backdrop-blur-md flex flex-row items-center gap-1 w-full sm:w-auto max-w-full justify-between shadow-lg shadow-black/20 text-xs sm:text-sm">
                 <button
                   onClick={() => setActiveTab('planner')}
-                  className={`w-full sm:w-auto px-4 sm:px-5 py-3 sm:py-2.5 rounded-xl font-semibold transition-all duration-300 flex justify-center items-center gap-2 ${activeTab === 'planner'
-                    ? 'bg-slate-800 text-blue-400 shadow-xl shadow-black/30 scale-100'
-                    : 'text-slate-300 hover:bg-slate-800/40 border border-slate-700/50'
+                  className={`flex-1 sm:w-auto px-2 sm:px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 flex justify-center items-center gap-1.5 sm:gap-2 ${activeTab === 'planner'
+                    ? 'bg-slate-800 text-blue-400 shadow-md shadow-black/30'
+                    : 'text-slate-400 hover:text-slate-200'
                     }`}
                 >
-                  Day Planner
+                  <span className="sm:hidden text-base">📝</span>
+                  <span className="hidden sm:inline">Day Planner</span>
+                  <span className="sm:hidden">Planner</span>
                 </button>
                 <button
                   onClick={() => setActiveTab('routine')}
-                  className={`w-full sm:w-auto px-4 sm:px-5 py-3 sm:py-2.5 rounded-xl font-semibold transition-all duration-300 flex justify-center items-center gap-2 ${activeTab === 'routine'
-                    ? 'bg-slate-800 text-violet-400 shadow-xl shadow-black/30 scale-100'
-                    : 'text-slate-300 hover:bg-slate-800/40 border border-slate-700/50'
+                  className={`flex-1 sm:w-auto px-2 sm:px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 flex justify-center items-center gap-1.5 sm:gap-2 ${activeTab === 'routine'
+                    ? 'bg-slate-800 text-violet-400 shadow-md shadow-black/30'
+                    : 'text-slate-400 hover:text-slate-200'
                     }`}
                 >
-                  Daily Routine
+                  <span className="sm:hidden text-base">🔄</span>
+                  <span className="hidden sm:inline">Daily Routine</span>
+                  <span className="sm:hidden">Routine</span>
                 </button>
                 <button
                   onClick={() => setCurrentView('analytics')}
-                  className={`w-full sm:w-auto px-4 sm:px-5 py-3 sm:py-2.5 rounded-xl font-semibold transition-all duration-300 flex justify-center items-center gap-2 text-slate-300 hover:bg-slate-800/40 border border-slate-700/50`}
+                  className={`flex-1 sm:w-auto px-2 sm:px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 flex justify-center items-center gap-1.5 sm:gap-2 text-slate-400 hover:text-slate-200`}
                 >
-                  <FaChartLine className="text-purple-400" /> Analytics
+                  <FaChartLine className="text-purple-400 text-base" />
+                  <span className="hidden sm:inline">Analytics</span>
+                  <span className="sm:hidden">Stats</span>
                 </button>
               </div>
             </div>
 
             {activeTab === 'planner' ? (
-              <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 w-full">
-                <div className="flex flex-col gap-6 lg:col-span-3">
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 md:gap-8 w-full">
+                <div className="flex flex-col gap-4 md:gap-6 lg:col-span-3">
                   <ActivityInput onAddActivity={addActivity} selectedDate={selectedDate} />
                   <ActivityList
                     activities={activities[dateKey] || []}
@@ -265,7 +271,7 @@ function App() {
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 w-full">
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 md:gap-8 w-full">
                 <div className="lg:col-span-3">
                   <RoutineTracker selectedDate={selectedDate} routines={routines} setRoutines={setRoutines} />
                 </div>

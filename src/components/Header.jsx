@@ -19,7 +19,7 @@ function Header({ currentView, setCurrentView, theme, setTheme, userData }) {
                 {/* Background removed as requested */}
             </div>
 
-            <div className="relative z-10 px-4 md:px-8 max-w-7xl mx-auto flex items-center justify-between h-20">
+            <div className="relative z-10 px-4 md:px-8 max-w-7xl mx-auto flex items-center justify-between h-16 md:h-20">
                 {/* Logo Section - Left Aligned */}
                 <div
                     className="flex items-center gap-3 md:gap-4 cursor-pointer whitespace-nowrap"

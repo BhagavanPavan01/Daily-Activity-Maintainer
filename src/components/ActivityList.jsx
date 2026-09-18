@@ -19,17 +19,17 @@ function ActivityList({ activities, onToggle, onDelete, onEdit, onClearCompleted
 
     if (activities.length === 0) {
         return (
-            <div className="bg-slate-800/90 border border-slate-700/50 backdrop-blur-sm rounded-2xl p-6 shadow-2xl shadow-black/40 flex-1 animate-fade-in">
+            <div className="bg-slate-800/90 border border-slate-700/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-2xl shadow-black/40 flex-1 animate-fade-in">
                 <div className="text-center py-12">
-                    <p className="text-slate-400 text-lg">No activities for this date</p>
-                    <p className="text-slate-500 text-sm mt-1">Add your first activity above!</p>
+                    <p className="text-slate-400 text-base sm:text-lg">No activities for this date</p>
+                    <p className="text-slate-500 text-xs sm:text-sm mt-1">Add your first activity above!</p>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="bg-slate-800/90 border border-slate-700/50 backdrop-blur-sm rounded-2xl p-6 shadow-2xl shadow-black/40 flex-1 animate-fade-in">
+        <div className="bg-slate-800/90 border border-slate-700/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-2xl shadow-black/40 flex-1 animate-fade-in">
             <div className="mb-5">
                 <div className="flex justify-between items-center mb-2 text-sm text-slate-300">
                     <span className="font-medium">Progress</span>

@@ -64,15 +64,15 @@ function Calendar({ selectedDate, onSelectDate, currentMonth, setCurrentMonth, g
     ];
 
     return (
-        <div className="bg-slate-800/90 border border-slate-700/50 backdrop-blur-sm rounded-2xl p-6 shadow-2xl shadow-black/40 w-full animate-fade-in flex flex-col h-fit">
-            <div className="flex justify-between items-center mb-5">
+        <div className="bg-slate-800/90 border border-slate-700/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-2xl shadow-black/40 w-full animate-fade-in flex flex-col h-fit">
+            <div className="flex justify-between items-center mb-4 sm:mb-5">
                 <button
                     onClick={() => changeMonth(-1)}
                     className="w-9 h-9 bg-slate-700/50 border-none rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 text-slate-300 hover:bg-blue-600 hover:text-white hover:scale-110"
                 >
                     <FaChevronLeft />
                 </button>
-                <h3 className="text-lg font-semibold text-slate-100">
+                <h3 className="text-base sm:text-lg font-semibold text-slate-100">
                     {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
                 </h3>
                 <button
@@ -92,8 +92,8 @@ function Calendar({ selectedDate, onSelectDate, currentMonth, setCurrentMonth, g
                     {renderCalendarDays()}
                 </div>
             </div>
-            <div className="flex flex-wrap justify-center gap-4 mt-auto pt-5 border-t border-slate-700">
-                <div className="flex items-center gap-2 text-sm text-slate-300">
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mt-auto pt-4 sm:pt-5 border-t border-slate-700">
+                <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-slate-300">
                     <span className="w-4 h-4 rounded-full bg-emerald-500 inline-block"></span>
                     <span>All tasks completed</span>
                 </div>

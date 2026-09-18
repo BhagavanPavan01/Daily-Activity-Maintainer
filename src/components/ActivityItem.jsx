@@ -53,10 +53,10 @@ function ActivityItem({ activity, onToggle, onDelete, onEdit }) {
                     onChange={(e) => setEditText(e.target.value)}
                     onKeyDown={handleKeyDown}
                     onBlur={handleSave}
-                    className="flex-1 px-2 py-1 bg-slate-800 border-2 border-blue-500 rounded-lg outline-none"
+                    className="flex-1 px-2 py-1 bg-slate-800 border-2 border-blue-500 rounded-lg outline-none text-sm sm:text-base"
                 />
             ) : (
-                <span className={`flex-1 text-base text-slate-100 ${activity.completed ? 'line-through text-slate-400' : ''
+                <span className={`flex-1 text-sm sm:text-base text-slate-100 ${activity.completed ? 'line-through text-slate-400' : ''
                     }`}>
                     {activity.text}
                 </span>
