@@ -170,10 +170,40 @@ function App() {
 
     if (dayActivities.length === 0 && dayRoutines.length === 0) return 'neutral';
 
-    if (dayActivities.length === 0 && dayRoutines.length > 0) return 'completed';
+    let totalCategories = 5;
+    try {
+      const storedCategories = window.localStorage.getItem('daily_routine_categories_v2');
+      if (storedCategories) {
+        const parsed = JSON.parse(storedCategories);
+        if (Array.isArray(parsed)) {
+          totalCategories = parsed.length;
+        }
+      }
+    } catch (e) {
+      console.error("Error parsing categories:", e);
+    }
 
-    const allCompleted = dayActivities.every(a => a.completed);
-    return allCompleted ? 'completed' : 'incomplete';
+    const uniqueLoggedCategories = new Set(dayRoutines.map(r => r.categoryId)).size;
+    let routinesStatus = 'neutral';
+    if (uniqueLoggedCategories > 0) {
+      routinesStatus = uniqueLoggedCategories >= totalCategories ? 'completed' : 'incomplete';
+    }
+
+    let activitiesStatus = 'neutral';
+    if (dayActivities.length > 0) {
+      const allActivitiesCompleted = dayActivities.every(a => a.completed);
+      activitiesStatus = allActivitiesCompleted ? 'completed' : 'incomplete';
+    }
+
+    if (activitiesStatus === 'incomplete' || routinesStatus === 'incomplete') {
+      return 'incomplete';
+    }
+
+    if (activitiesStatus === 'completed' || routinesStatus === 'completed') {
+      return 'completed';
+    }
+
+    return 'neutral';
   };
 
   return (

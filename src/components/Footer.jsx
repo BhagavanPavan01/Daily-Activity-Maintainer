@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaHeart, FaEnvelope, FaPhone, FaMapMarkerAlt, FaGlobe } from 'react-icons/fa';
+import { FaHeart, FaEnvelope, FaPhone, FaMapMarkerAlt, FaGlobe, FaGithub, FaLinkedin } from 'react-icons/fa';
 
 function Footer() {
     const currentYear = new Date().getFullYear();
@@ -32,6 +32,12 @@ function Footer() {
                         </a>
                         <a href="https://bhagavanpavan-portfolio.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400 transition-all transform hover:scale-125" aria-label="Portfolio">
                             <FaGlobe className="text-xl" />
+                        </a>
+                        <a href="https://github.com/BhagavanPavan01" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-gray-900 dark:text-slate-400 dark:hover:text-white transition-all transform hover:scale-125" aria-label="GitHub">
+                            <FaGithub className="text-xl" />
+                        </a>
+                        <a href="https://www.linkedin.com/in/bhagavan-pavan-227857253" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-blue-700 dark:text-slate-400 dark:hover:text-blue-500 transition-all transform hover:scale-125" aria-label="LinkedIn">
+                            <FaLinkedin className="text-xl" />
                         </a>
                     </div>
                 </div>
