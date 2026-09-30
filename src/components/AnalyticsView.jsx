@@ -1,10 +1,15 @@
 import React, { useMemo } from 'react';
 import { FaChartBar, FaCheckCircle, FaListUl, FaFire, FaTrophy, FaCalendarDay } from 'react-icons/fa';
 
-function AnalyticsView({ activities }) {
+function AnalyticsView({ activities, routines }) {
     // Analytics algorithms wrapped in useMemo for performance
     const stats = useMemo(() => {
-        const activeDates = Object.keys(activities || {}).sort((a, b) => new Date(a) - new Date(b));
+        // Collect all dates that have either activities or routines
+        const allDatesSet = new Set([
+            ...Object.keys(activities || {}),
+            ...Object.keys(routines || {})
+        ]);
+        const activeDates = Array.from(allDatesSet).sort((a, b) => new Date(a) - new Date(b));
 
         let totalTasks = 0;
         let completedTasks = 0;
@@ -31,9 +36,11 @@ function AnalyticsView({ activities }) {
             const dateStr = d.toDateString();
             const dayName = d.toLocaleDateString('en-US', { weekday: 'short' });
 
-            const dayTasks = activities[dateStr] || [];
-            const dayTotal = dayTasks.length;
-            const dayCompleted = dayTasks.filter(t => t.completed).length;
+            const dayTasks = activities?.[dateStr] || [];
+            const dayRoutines = routines?.[dateStr] || [];
+
+            const dayTotal = dayTasks.length + dayRoutines.length;
+            const dayCompleted = dayTasks.filter(t => t.completed).length + dayRoutines.length;
 
             last7DaysData.push({
                 dateStr,
@@ -45,12 +52,14 @@ function AnalyticsView({ activities }) {
         }
 
         activeDates.forEach(dateStr => {
-            const dayTasks = activities[dateStr] || [];
-            if (dayTasks.length === 0) return;
+            const dayTasks = activities?.[dateStr] || [];
+            const dayRoutines = routines?.[dateStr] || [];
+
+            if (dayTasks.length === 0 && dayRoutines.length === 0) return;
 
             // Tasks stats
-            const dayTotal = dayTasks.length;
-            const dayCompleted = dayTasks.filter(t => t.completed).length;
+            const dayTotal = dayTasks.length + dayRoutines.length;
+            const dayCompleted = dayTasks.filter(t => t.completed).length + dayRoutines.length;
 
             totalTasks += dayTotal;
             completedTasks += dayCompleted;
@@ -113,7 +122,7 @@ function AnalyticsView({ activities }) {
             bestDay,
             last7DaysData
         };
-    }, [activities]);
+    }, [activities, routines]);
 
     return (
         <div className="flex flex-col gap-6 sm:gap-8 w-full animate-fade-in mt-2 sm:mt-4">
@@ -125,14 +134,14 @@ function AnalyticsView({ activities }) {
                     <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <FaListUl className="text-3xl sm:text-4xl text-blue-400 mb-1 sm:mb-2 transform group-hover:scale-110 transition-transform" />
                     <span className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">{stats.totalTasks}</span>
-                    <span className="text-xs sm:text-sm text-slate-400 dark:text-slate-500 dark:text-slate-400 font-medium">Total Tasks Created</span>
+                    <span className="text-xs sm:text-sm text-slate-400 dark:text-slate-500 dark:text-slate-400 font-medium">Total Items Tracked</span>
                 </div>
 
                 <div className="bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50 p-4 sm:p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center gap-2 sm:gap-3 text-center relative overflow-hidden group">
                     <div className="absolute inset-0 bg-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <FaCheckCircle className="text-3xl sm:text-4xl text-green-400 mb-1 sm:mb-2 transform group-hover:scale-110 transition-transform" />
                     <span className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">{stats.completedTasks}</span>
-                    <span className="text-xs sm:text-sm text-slate-400 dark:text-slate-500 dark:text-slate-400 font-medium">Completed Tasks</span>
+                    <span className="text-xs sm:text-sm text-slate-400 dark:text-slate-500 dark:text-slate-400 font-medium">Completed Items</span>
                 </div>
 
                 <div className="bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50 p-4 sm:p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center gap-2 sm:gap-3 text-center relative overflow-hidden group">
@@ -207,7 +216,7 @@ function AnalyticsView({ activities }) {
                                     <div className="absolute top-0 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white px-3 py-2 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity z-10 whitespace-nowrap shadow-[0_4px_20px_rgba(0,0,0,0.5)] pointer-events-none transform -translate-x-1/2 left-1/2 flex flex-col items-center">
                                         <p className="font-bold text-blue-300 mb-1">{day.dateStr}</p>
                                         <div className="flex gap-4">
-                                            <div className="flex flex-col items-center"><span className="text-slate-400 dark:text-slate-500 dark:text-slate-400">Tasks</span><span className="font-bold">{day.total}</span></div>
+                                            <div className="flex flex-col items-center"><span className="text-slate-400 dark:text-slate-500 dark:text-slate-400">Items</span><span className="font-bold">{day.total}</span></div>
                                             <div className="flex flex-col items-center"><span className="text-slate-400 dark:text-slate-500 dark:text-slate-400">Done</span><span className="font-bold text-green-400">{day.completed}</span></div>
                                         </div>
                                     </div>

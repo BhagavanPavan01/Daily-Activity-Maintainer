@@ -306,7 +306,7 @@ function App() {
           />
         )}
 
-        {currentView === 'analytics' && <AnalyticsView activities={activities} />}
+        {currentView === 'analytics' && <AnalyticsView activities={activities} routines={routines} />}
         {currentView === 'user' && <UserProfile userData={userData} setUserData={setUserData} />}
       </main>
       <Footer />
