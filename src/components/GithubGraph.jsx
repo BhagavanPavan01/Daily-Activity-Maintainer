@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useEffect } from 'react';
 
-function GithubGraph({ activities, routines, selectedDate, onSelectDate }) {
+function GithubGraph({ activities, routines, selectedDate, onSelectDate, onOpenDayDetails }) {
     const scrollContainerRef = useRef(null);
 
     // Generate dates for the last 365 days
@@ -132,15 +132,11 @@ function GithubGraph({ activities, routines, selectedDate, onSelectDate }) {
                                             key={dayIndex}
                                             onClick={() => {
                                                 if (day) {
-                                                    const year = day.date.getFullYear();
-                                                    const month = String(day.date.getMonth() + 1).padStart(2, '0');
-                                                    const dateNum = String(day.date.getDate()).padStart(2, '0');
-                                                    const dateStr = `${year}-${month}-${dateNum}`;
-
-                                                    // Open new tab targeting this date precisely
-                                                    window.open(`${window.location.origin}${window.location.pathname}?date=${dateStr}`, '_blank');
-
                                                     if (onSelectDate) onSelectDate(day.date);
+
+                                                    if (day.level > 0 && onOpenDayDetails) {
+                                                        onOpenDayDetails(day.date);
+                                                    }
                                                 }
                                             }}
                                             className={`w-[12px] h-[12px] sm:w-[15px] sm:h-[15px] rounded-[3px] sm:rounded p-0 transition-all duration-200 hover:scale-125 hover:z-10 ${day ? getLevelColor(day.level) : 'bg-transparent'} ${isSelected ? 'ring-2 ring-offset-1 ring-offset-white dark:ring-offset-slate-900 ring-slate-800 dark:ring-white scale-125 z-10' : ''}`}

@@ -9,6 +9,7 @@ import RoutineTracker from './components/RoutineTracker';
 import AnalyticsView from './components/AnalyticsView';
 import UserProfile from './components/UserProfile';
 import GithubGraph from './components/GithubGraph';
+import DayDetailsView from './components/DayDetailsView';
 import useLocalStorage from './hooks/useLocalStorage';
 
 function App() {
@@ -288,9 +289,21 @@ function App() {
             )}
 
             <div className="w-full pt-4">
-              <GithubGraph activities={activities} routines={routines} selectedDate={selectedDate} onSelectDate={setSelectedDate} />
+              <GithubGraph activities={activities} routines={routines} selectedDate={selectedDate} onSelectDate={setSelectedDate} onOpenDayDetails={(date) => {
+                setSelectedDate(date);
+                setCurrentView('day-details');
+              }} />
             </div>
           </>
+        )}
+
+        {currentView === 'day-details' && (
+          <DayDetailsView
+            date={selectedDate}
+            activities={activities}
+            routines={routines}
+            onBack={() => setCurrentView('dashboard')}
+          />
         )}
 
         {currentView === 'analytics' && <AnalyticsView activities={activities} />}
