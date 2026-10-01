@@ -34,14 +34,18 @@ function Calendar({ selectedDate, onSelectDate, currentMonth, setCurrentMonth, g
 
             let className = 'aspect-square flex items-center justify-center rounded-full cursor-pointer transition-all duration-300 text-sm hover:scale-110';
 
-            if (isSelected) {
-                className += ' bg-blue-600 text-white scale-110 shadow-2xl shadow-black/40';
-            } else if (status === 'completed') {
+            if (status === 'completed') {
                 className += ' bg-emerald-500 text-white';
+                if (isSelected) className += ' scale-110 shadow-2xl shadow-emerald-500/40 ring-2 ring-emerald-400 ring-offset-2 ring-offset-slate-800';
             } else if (status === 'incomplete') {
                 className += ' bg-red-500 text-white';
+                if (isSelected) className += ' scale-110 shadow-2xl shadow-red-500/40 ring-2 ring-red-400 ring-offset-2 ring-offset-slate-800';
             } else {
-                className += ' hover:bg-blue-600/10';
+                if (isSelected) {
+                    className += ' bg-blue-600 text-white scale-110 shadow-2xl shadow-blue-500/40 ring-2 ring-blue-400 ring-offset-2 ring-offset-slate-800';
+                } else {
+                    className += ' hover:bg-blue-600/10 text-slate-300';
+                }
             }
 
             days.push(
